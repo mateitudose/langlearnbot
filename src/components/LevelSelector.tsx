@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Button } from "@nextui-org/react";
 
-export default function LevelSelector() {
+interface LevelSelectorProps {
+    onLevelSelect: (level: string) => void;
+}
+
+export default function LevelSelector({ onLevelSelect }: LevelSelectorProps) {
     const [selectedButton, setSelectedButton] = useState("");
 
     const buttonData = [
@@ -15,6 +19,7 @@ export default function LevelSelector() {
 
     const handleButtonClick = (level: string) => {
         setSelectedButton(level);
+        onLevelSelect(level);
     };
 
     return (

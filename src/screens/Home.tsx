@@ -1,7 +1,16 @@
+import { useState } from 'react';
 import {Card, Spacer} from "@nextui-org/react";
 import LevelSelector from "../components/LevelSelector.tsx";
+import {useLocation} from "wouter";
 
 export default function Home() {
+    const [_, setLocation] = useLocation();
+    const [selectedLevel, setSelectedLevel] = useState("");
+
+    const handleLevelSelect = (level: string) => {
+        setSelectedLevel(level);
+    };
+
     return (
         <div className="flex flex-col px-3 h-screen bg-neutral-200">
             <div className="flex flex-col justify-center items-center bg-gray-100 h-screen rounded-xl mt-4 mb-4 p-4">
@@ -10,11 +19,10 @@ export default function Home() {
                 <Spacer y={6}/>
                 <p>Choose the desired CEFR language level</p>
                 <Spacer y={2}/>
-                <LevelSelector/>
+                <LevelSelector onLevelSelect={handleLevelSelect}/>
                 <Spacer y={12}/>
                 <div className={"flex flex-row justify-center gap-2"}>
-                    <Card isPressable={true} className={"w-36 p-4 items-center justify-center"} onClick={() => {
-                    }}>
+                    <Card isPressable={true} onPress={() => setLocation(`/reading/${selectedLevel}`)} className={"w-36 p-4 items-center justify-center"}>
                         <p>Reading</p>
                         <Spacer y={1}/>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
@@ -24,8 +32,7 @@ export default function Home() {
                         </svg>
                     </Card>
                     {/* Writing task not yet ready to release */}
-                    <Card isPressable={false} className={"w-36 p-4 items-center justify-center"} onClick={() => {
-                    }}>
+                    <Card isPressable={false} className={"w-36 p-4 items-center justify-center"}>
                         <p>Writing</p>
                         <Spacer y={1}/>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}

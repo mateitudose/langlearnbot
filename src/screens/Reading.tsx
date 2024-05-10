@@ -1,12 +1,20 @@
 import {Button, Radio, RadioGroup, ScrollShadow, Spacer} from "@nextui-org/react";
+import {useLocation, useRoute} from "wouter";
 
 export default function Reading() {
+    const [matched, params] = useRoute("/reading/:level");
+    const [_, setLocation] = useLocation();
+
+    if (!matched) {
+       setLocation("/")
+    }
+
     return (
         <div className="grid grid-cols-2 px-3 h-screen bg-neutral-200 overflow-auto">
             <div className="flex flex-col bg-gray-100 rounded-l-xl rounded-r-none mt-4 mb-4">
                 <div className="flex flex-col flex-grow m-4">
                     <h1 className="text-xl font-bold">Test: Reading Comprehension</h1>
-                    <h2 className="text-lg font-bold">CEFR level: B2</h2>
+                    <h2 className="text-lg font-bold">CEFR level: {params?.level}</h2>
                     <Spacer y={2}/>
                     <p>Read the text below and select the correct answer for each question:</p>
                     <Spacer y={2}/>
