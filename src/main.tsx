@@ -11,6 +11,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <NextUIProvider>
             <Switch>
                 <Route path={"/"} component={Home}/>
+                <Route path={"/reading"} component={Reading} />
                 <Route path={"/reading/:level"} component={Reading}/>
             </Switch>
         </NextUIProvider>

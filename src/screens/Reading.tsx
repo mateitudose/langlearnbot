@@ -1,12 +1,34 @@
-import {Button, Radio, RadioGroup, ScrollShadow, Spacer} from "@nextui-org/react";
+import {Button, Radio, RadioGroup, ScrollShadow, Spacer, Spinner} from "@nextui-org/react";
 import {useLocation, useRoute} from "wouter";
+import {useEffect, useState} from "react";
 
 export default function Reading() {
     const [matched, params] = useRoute("/reading/:level");
     const [_, setLocation] = useLocation();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     if (!matched) {
-       setLocation("/")
+        setLocation("/");
+        return null;
+    }
+
+    if (loading) {
+        return (
+            <div className="flex flex-col px-3 h-screen bg-neutral-200">
+                <div className="flex flex-col justify-center items-center bg-gray-100 h-screen rounded-xl mt-4 mb-4 p-4">
+                    <Spinner size={"lg"} color={"primary"}/>
+                    <Spacer y={2}/>
+                    <p>Generating test...</p>
+                </div>
+            </div>);
     }
 
     return (

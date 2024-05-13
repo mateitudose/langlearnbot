@@ -31,7 +31,7 @@ export default function Home() {
                                   d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
                         </svg>
                     </Card>
-                    {/* Writing task not yet ready to release */}
+                    {/* TODO: Writing task not yet ready to release */}
                     <Card isPressable={false} className={"w-36 p-4 items-center justify-center"}>
                         <p>Writing</p>
                         <Spacer y={1}/>
