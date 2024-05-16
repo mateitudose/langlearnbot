@@ -1,30 +1,31 @@
 import {Button, ScrollShadow, Spacer, Spinner} from "@nextui-org/react";
 import {useLocation, useRoute} from "wouter";
 import {useEffect, useState} from "react";
-import generateReadingTest from "../functions/generateReadingTest.ts";
 import React from "react";
 import Question from "../components/Question.tsx";
+import ReadingTestType from "../../../types/ReadingTestType.ts";
+import {fetchReadingTest} from "../functions/fetchReadingTest.ts";
 
 export default function Reading() {
     const [matched, params] = useRoute("/reading/:level");
     const [_, setLocation] = useLocation();
     const [loading, setLoading] = useState(true);
-    const [readingTest, setReadingTest] = useState<ReadingTest | null>(null);
+    const [readingTest, setReadingTest] = useState<ReadingTestType | null>(null);
 
+    /* TODO: Check why there are 2 requests being made */
     useEffect(() => {
-        const fetchReadingTest = async () => {
-            if (!params?.level) {
-                console.error('Level is undefined');
-                setLocation("/");
-                return null;
-            }
-            console.log(`Generating reading test for level ${params.level}`);
-            const test = await generateReadingTest(params.level);
-            setReadingTest(test);
-        };
         setLoading(true);
-        fetchReadingTest()
-            .then(() => setLoading(false))
+        if (!params?.level)
+        {
+            console.error('Missing level parameter');
+            setLocation("/");
+            return;
+        }
+        fetchReadingTest(params.level)
+            .then((test) => {
+                setReadingTest(test);
+                setLoading(false);
+            })
             .catch((error) => {
                 console.error('Failed to generate test: ' + error.message);
                 setLocation("/");

@@ -1,6 +1,7 @@
 import {Radio, RadioGroup, Spacer} from "@nextui-org/react";
+import type QuestionType from "../../../types/QuestionType.ts";
 
-export default function Question({questionData, index} : {questionData : Question, index: number}) {
+export default function Question({questionData, index} : {questionData : QuestionType, index: number}) {
     return (
         <div className={"flex flex-col"}>
             <p className="font-bold">Question {index + 1}</p>
