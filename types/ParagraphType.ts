@@ -1,3 +1,3 @@
 export default interface ParagraphType {
-    text: string;
+    paragraph: string;
 }

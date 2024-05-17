@@ -1,7 +1,6 @@
 import {Button, ScrollShadow, Spacer, Spinner} from "@nextui-org/react";
 import {useLocation, useRoute} from "wouter";
-import {useEffect, useState} from "react";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Question from "../components/Question.tsx";
 import ReadingTestType from "../../../types/ReadingTestType.ts";
 import {fetchReadingTest} from "../functions/fetchReadingTest.ts";
@@ -12,11 +11,9 @@ export default function Reading() {
     const [loading, setLoading] = useState(true);
     const [readingTest, setReadingTest] = useState<ReadingTestType | null>(null);
 
-    /* TODO: Check why there are 2 requests being made */
     useEffect(() => {
         setLoading(true);
-        if (!params?.level)
-        {
+        if (!params?.level) {
             console.error('Missing level parameter');
             setLocation("/");
             return;
@@ -41,10 +38,13 @@ export default function Reading() {
     if (loading) {
         return (
             <div className="flex flex-col px-3 h-screen bg-neutral-200">
-                <div className="flex flex-col justify-center items-center bg-gray-100 h-screen rounded-xl mt-4 mb-4 p-4">
+                <div
+                    className="flex flex-col justify-center items-center bg-gray-100 h-screen rounded-xl mt-4 mb-4 p-4">
                     <Spinner size={"lg"} color={"primary"}/>
-                    <Spacer y={2}/>
+                    <Spacer y={4}/>
                     <p>Generating test...</p>
+                    <Spacer y={1}/>
+                    <p>This may take a few seconds, depending on your internet connection</p>
                 </div>
             </div>);
     }
@@ -59,21 +59,23 @@ export default function Reading() {
                     <p>Read the text below and select the correct answer for each question:</p>
                     <Spacer y={2}/>
                     <ScrollShadow className={"flex-grow w-full h-96 bg-neutral-200 rounded p-2"} isEnabled={false}>
-                        {readingTest?.text.map((paragraph, index) => (
-                            <React.Fragment key={index}>
-                                <p>{paragraph.text}</p>
-                                <Spacer y={2}/>
-                            </React.Fragment>
-                        ))}
+                        {readingTest?.text.map((generatedParagraph, index) => {
+                            console.log(`Paragraph ${index}:`, generatedParagraph);
+                            return (
+                                <React.Fragment key={index}>
+                                    <p>{generatedParagraph.paragraph}</p>
+                                    <Spacer y={2}/>
+                                </React.Fragment>
+                            );
+                        })}
                     </ScrollShadow>
                 </div>
             </div>
             <div className="flex flex-col bg-gray-100 rounded-r-xl rounded-l-none mt-4 mb-4 overflow-scroll">
                 <div className="flex flex-col flex-grow m-4">
                     {readingTest?.questions.map((question, index) => (
-                        <Question key={index} questionData={question} index={index} />
+                        <Question key={index} questionData={question} index={index}/>
                     ))}
-                    <Spacer y={4}/>
                     <Spacer y={4}/>
                     <Button color={"primary"}>Check answers</Button>
                 </div>
