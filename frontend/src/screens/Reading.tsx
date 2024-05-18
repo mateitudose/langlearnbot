@@ -10,6 +10,7 @@ export default function Reading() {
     const [_, setLocation] = useLocation();
     const [loading, setLoading] = useState(true);
     const [readingTest, setReadingTest] = useState<ReadingTestType | null>(null);
+    const [finishedTest, setFinishedTest] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -42,7 +43,7 @@ export default function Reading() {
                     className="flex flex-col justify-center items-center bg-gray-100 h-screen rounded-xl mt-4 mb-4 p-4">
                     <Spinner size={"lg"} color={"primary"}/>
                     <Spacer y={4}/>
-                    <p>Generating test...</p>
+                    <p>Generating test using AI...</p>
                     <Spacer y={1}/>
                     <p>This may take a few seconds, depending on your internet connection</p>
                 </div>
@@ -60,7 +61,6 @@ export default function Reading() {
                     <Spacer y={2}/>
                     <ScrollShadow className={"flex-grow w-full h-96 bg-neutral-200 rounded p-2"} isEnabled={false}>
                         {readingTest?.text.map((generatedParagraph, index) => {
-                            console.log(`Paragraph ${index}:`, generatedParagraph);
                             return (
                                 <React.Fragment key={index}>
                                     <p>{generatedParagraph.paragraph}</p>
@@ -74,10 +74,11 @@ export default function Reading() {
             <div className="flex flex-col bg-gray-100 rounded-r-xl rounded-l-none mt-4 mb-4 overflow-scroll">
                 <div className="flex flex-col flex-grow m-4">
                     {readingTest?.questions.map((question, index) => (
-                        <Question key={index} questionData={question} index={index}/>
+                        <Question key={index} questionData={question} correctOption={question.correct_answer}
+                                  finishedTest={finishedTest} index={index}/>
                     ))}
                     <Spacer y={4}/>
-                    <Button color={"primary"}>Check answers</Button>
+                    <Button color={"primary"} onClick={() => setFinishedTest(true)}>Check answers</Button>
                 </div>
             </div>
         </div>
