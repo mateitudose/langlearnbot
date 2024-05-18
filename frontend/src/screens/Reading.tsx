@@ -78,7 +78,11 @@ export default function Reading() {
                                   finishedTest={finishedTest} index={index}/>
                     ))}
                     <Spacer y={4}/>
-                    <Button color={"primary"} onClick={() => setFinishedTest(true)}>Check answers</Button>
+                    {finishedTest ? (
+                        <Button color={"primary"} onClick={() => setLocation("/")}>Return to home</Button>
+                    ) : (
+                        <Button color={"primary"} onClick={() => setFinishedTest(true)}>Check answers</Button>
+                    )}
                 </div>
             </div>
         </div>
