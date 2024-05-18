@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "build:frontend": "tsc && vite build",
+    "build:linux": "cd ../backend && bun run build:linux && mv langlearnbot-backend-x86_64-unknown-linux-gnu ../frontend/src-tauri/binaries && cd ../frontend && bunx tauri build"
   },
   "dependencies": {
     "@nextui-org/react": "^2.3.6",

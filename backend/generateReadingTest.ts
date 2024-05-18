@@ -10,7 +10,7 @@ export default async function generateReadingTest(level: string): Promise<Readin
     const readingTest = await anthropic.messages.create({
         model: "claude-3-haiku-20240307",
         max_tokens: 3000,
-        temperature: 0.9,
+        temperature: 0.85,
         messages: [{role: "user", content: readingTextPrompt(level)}]
     });
     return JSON.parse(readingTest.content[0].text);
