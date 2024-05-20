@@ -32,7 +32,7 @@ export default function Home() {
                         </svg>
                     </Card>
                     {/* TODO: Writing task not yet ready to release */}
-                    <Card isPressable={false} className={"w-36 p-4 items-center justify-center"}>
+                    <Card isPressable={true} onPress={() => setLocation(`/writing/${selectedLevel}`)} className={"w-36 p-4 items-center justify-center"}>
                         <p>Writing</p>
                         <Spacer y={1}/>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}

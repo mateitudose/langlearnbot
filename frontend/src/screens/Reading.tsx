@@ -42,8 +42,8 @@ export default function Reading() {
                 <div
                     className="flex flex-col justify-center items-center bg-gray-100 h-screen rounded-xl mt-4 mb-4 p-4">
                     <Spinner size={"lg"} color={"primary"}/>
-                    <Spacer y={4}/>
-                    <p>Generating test using AI...</p>
+                    <Spacer y={8}/>
+                    <p>Generating reading test using AI...</p>
                     <Spacer y={1}/>
                     <p>This may take a few seconds, depending on your internet connection</p>
                 </div>
