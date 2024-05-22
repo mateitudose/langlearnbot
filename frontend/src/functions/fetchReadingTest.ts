@@ -1,9 +1,12 @@
 import ReadingTestType from "../../../types/ReadingTestType.ts";
 
 export const fetchReadingTest = async (level: string): Promise<ReadingTestType> => {
-    // TODO: Implement a better way to handle retries
-    let retry = false;
-    while (true) {
+    const delay = (ms: number | undefined) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const MAX_RETRIES = 0;
+    let retryCount = 0;
+
+    while (retryCount <= MAX_RETRIES) {
         try {
             const response = await fetch(`http://localhost:3000/generateReadingTest?level=${level}`);
             if (!response.ok) {
@@ -11,11 +14,14 @@ export const fetchReadingTest = async (level: string): Promise<ReadingTestType> 
             }
             return await response.json();
         } catch (error) {
-            if (!retry) {
-                retry = true;
+            if (retryCount < MAX_RETRIES) {
+                retryCount++;
+                await delay(1000);
             } else {
                 return error as ReadingTestType;
             }
         }
     }
+
+    return {} as ReadingTestType;
 };

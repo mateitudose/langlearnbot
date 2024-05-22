@@ -1,14 +1,18 @@
-import {Button, Spacer, Spinner, Textarea} from "@nextui-org/react";
+import {Button, Modal, ModalContent, Spacer, Spinner, Textarea} from "@nextui-org/react";
 import {useLocation, useRoute} from "wouter";
 import {useEffect, useState} from "react";
 import WritingTestType from "../../../types/WritingTaskType.ts";
 import {fetchWritingTask} from "../functions/fetchWritingTask.ts";
+import {fetchWritingEvaluation} from "../functions/fetchWritingEvaluation.ts";
 
 export default function Writing() {
     const [matched, params] = useRoute("/writing/:level");
     const [_, setLocation] = useLocation();
     const [loading, setLoading] = useState(true);
     const [writingTask, setWritingTask] = useState<WritingTestType | null>(null);
+    const [essay, setEssay] = useState<string>("");
+    const [score, setScore] = useState<number | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -48,6 +52,15 @@ export default function Writing() {
             </div>);
     }
 
+    const handleSubmit = async () => {
+        setIsModalOpen(true);
+        if (writingTask) {
+            const result = await fetchWritingEvaluation({level: params.level, essay, task: writingTask.task});
+            console.log(result);
+            setScore(result.score);
+        }
+    };
+
     return (
         <div className="grid grid-cols-2 px-3 h-screen bg-neutral-200 overflow-auto">
             <div className="flex flex-col bg-gray-100 rounded-l-xl rounded-r-none mt-4 mb-4">
@@ -64,6 +77,8 @@ export default function Writing() {
                         minRows={10}
                         maxRows={50}
                         disableAutosize
+                        value={essay}
+                        onChange={(e) => setEssay(e.target.value)}
                     />
                 </div>
             </div>
@@ -107,8 +122,24 @@ export default function Writing() {
                     <p>4. Grammatical range and accuracy (25 points)</p>
                     <Spacer y={4}/>
                     <div className={"flex flex-col flex-grow justify-end"}>
-                        <Button color={"primary"} onClick={() => setLocation("/")}>Submit</Button>
+                        <Button color={"primary"} onClick={handleSubmit}>Submit</Button>
                     </div>
+                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                        <ModalContent>
+                            {score === null ?
+                                <div className={"flex flex-col p-4 items-center justify-center"}>
+                                    <Spinner size={"lg"} color={"primary"}/>
+                                </div> :
+                                <div className={"flex flex-col p-4"}>
+                                    <h1 className="text-xl font-bold">Your score: {score}/100</h1>
+                                    <Spacer y={2}/>
+                                    <p>Your essay has been evaluated. You can close this dialog now.</p>
+                                    <Spacer y={4}/>
+                                    <Button color={"primary"} onClick={() => setLocation("/")}>Return home</Button>
+                                </div>
+                            }
+                        </ModalContent>
+                    </Modal>
                 </div>
             </div>
         </div>
