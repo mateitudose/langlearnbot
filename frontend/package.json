@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "build:frontend": "tsc && vite build",
-    "build:linux": "cd ../backend && bun run build:linux && mv langlearnbot-backend-x86_64-unknown-linux-gnu ../frontend/src-tauri/binaries && cd ../frontend && bunx tauri build"
+    "build:linux": "cd ../backend && bun run build:linux && mv langlearnbot-backend-x86_64-unknown-linux-gnu ../frontend/src-tauri/binaries && cd ../frontend && bunx tauri build",
+    "build:mac": "cd ../backend && bun run build:mac && mv langlearnbot-backend-aarch64-apple-darwin ../frontend/src-tauri/binaries && cd ../frontend && bunx tauri build"
   },
   "dependencies": {
     "@nextui-org/react": "^2.3.6",

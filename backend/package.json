@@ -7,7 +7,7 @@
         "start": "bun run index.ts",
         "build:linux": "bun build --compile --target=bun-linux-x64 ./index.ts --outfile langlearnbot-backend-x86_64-unknown-linux-gnu",
         "build:mac": "bun build --compile --target=bun-darwin-arm64 ./index.ts --outfile langlearnbot-backend-aarch64-apple-darwin",
-        "build:windows": "bun build --compile --target=bun-windows-x64 ./index.ts --outfile langlearnbot-backend"
+        "build:windows": "bun build --compile --target=bun-windows-x64 ./index.ts --outfile langlearnbot-backend-x86_64-pc-windows"
     },
   "devDependencies": {
     "@types/bun": "latest"
