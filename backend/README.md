@@ -1,4 +1,4 @@
-# LangLearnBot - Frontend
+# LangLearnBot - Backend
 
 This is the proxy server used by the frontend to communicate with the Anthropic API, in order not to leak the API key.
 
