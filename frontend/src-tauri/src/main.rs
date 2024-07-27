@@ -3,7 +3,7 @@
 use tauri_plugin_shell::ShellExt;
 use tauri_plugin_shell::process::CommandEvent;
 use tauri::AppHandle;
-use tauri::Manager;
+use tauri::Emitter;
 
 #[tauri::command]
 fn start_backend(app: AppHandle) {
