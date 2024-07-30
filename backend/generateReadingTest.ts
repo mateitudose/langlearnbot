@@ -8,7 +8,7 @@ const anthropic = new Anthropic({
 
 export default async function generateReadingTest(level: string): Promise<ReadingTestType> {
     const generatedReadingTest = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307",
+        model: "claude-3-5-sonnet-20240620",
         max_tokens: 3000,
         temperature: 0.9,
         messages: [{role: "user", content: readingTextPrompt(level)}]

@@ -12,9 +12,9 @@ export default async function generateWritingScore({level, essay, task}: {
     task: string
 }): Promise<WritingEvaluationType> {
     const generatedWritingScore = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307",
-        max_tokens: 4000,
-        temperature: 0.9,
+        model: "claude-3-5-sonnet-20240620",
+        max_tokens: 20000,
+        temperature: 0.8,
         messages: [{role: "user", content: evaluateWriting(level, essay, task)}]
     });
     return JSON.parse(generatedWritingScore.content[0].text);
