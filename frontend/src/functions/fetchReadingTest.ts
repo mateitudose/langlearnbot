@@ -3,7 +3,7 @@ import ReadingTestType from "../../../types/ReadingTestType.ts";
 export const fetchReadingTest = async (level: string): Promise<ReadingTestType> => {
     const delay = (ms: number | undefined) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const MAX_RETRIES = 0;
+    const MAX_RETRIES = 2;
     let retryCount = 0;
 
     while (retryCount <= MAX_RETRIES) {

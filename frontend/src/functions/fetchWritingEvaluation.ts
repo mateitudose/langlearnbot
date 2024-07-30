@@ -7,7 +7,7 @@ export const fetchWritingEvaluation = async ({level, essay, task}: {
 }): Promise<WritingEvaluationType> => {
     const delay = (ms: number | undefined) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const MAX_RETRIES = 0;
+    const MAX_RETRIES = 2;
     let retryCount = 0;
 
     while (retryCount <= MAX_RETRIES) {
