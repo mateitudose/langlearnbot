@@ -1,4 +1,7 @@
 # LangLearnBot
+
+Documentatie: https://lbiro-my.sharepoint.com/:w:/g/personal/tudose_matei_9h-21_lbiro_onmicrosoft_com/EcRpVVFVB8lLhgr0c40XhkABwNsc4jJnDjgLd82K1AGsnw?e=MZuY7L
+
 LangLearnBot este o aplicație de desktop (Mac, Linux, Windows) ce își propune să îi ajute pe cei dornici să își exerseze folosirea limbilor străine într-un mod rapid și mult mai eficient. Cu ajutorul acestei aplicații, utilizatorii pot genera un număr nelimitat de teste de antrenament, de scris și citit.
 
 ![Screenshot from 2024-05-23 17-23-30](https://github.com/mateitudose/langlearnbot/assets/37705192/e6742a80-610d-4184-ac10-4b87cc933f0a)
